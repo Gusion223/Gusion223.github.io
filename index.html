@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -134,6 +134,76 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/24/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Gusion223">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gusion222's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Gusion222's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/24/test/" class="post-title-link" itemprop="url">此贴只是用于测试mathjax渲染</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-24 23:27:30 / 修改时间：23:30:59" itemprop="dateCreated datePublished" datetime="2023-11-24T23:27:30+08:00">2023-11-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>$$ evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i} $$</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -179,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-24 22:55:21" itemprop="dateModified" datetime="2023-11-24T22:55:21+08:00">2023-11-24</time>
+      <time title="修改时间：2023-11-24 23:44:15" itemprop="dateModified" datetime="2023-11-24T23:44:15+08:00">2023-11-24</time>
     </span>
 
   
@@ -195,8 +265,8 @@
           <h1 id="计算机体系结构量化研究方法"><a href="#计算机体系结构量化研究方法" class="headerlink" title="计算机体系结构量化研究方法"></a>计算机体系结构量化研究方法</h1><h2 id="第1章-量化设计与分析基础"><a href="#第1章-量化设计与分析基础" class="headerlink" title="第1章 量化设计与分析基础"></a>第1章 量化设计与分析基础</h2><h3 id="1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势"><a href="#1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势" class="headerlink" title="1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势"></a>1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势</h3><ul>
 <li><p>单次逻辑脉冲的能耗（由晶体管频繁放电充电导致的）</p>
 </li>
-<li><script type="math/tex; mode=display">
-E_{dynamic} \varpropto \frac{1}{2}CU^2·f</script></li>
+<li><p>$$ E_{dynamic} \varpropto \frac{1}{2}CU^2·f $$</p>
+</li>
 <li><p>现代未处理器减少动态功耗的方法</p>
 <ol>
 <li>不执行相关操作，如未使用核心时,禁止提供时钟</li>
@@ -209,8 +279,8 @@ E_{dynamic} \varpropto \frac{1}{2}CU^2·f</script></li>
 <ul>
 <li><p>维持状态不变的功率</p>
 </li>
-<li><script type="math/tex; mode=display">
-E_{static} \varpropto Current_{static}·Voltage</script></li>
+<li><p>$$ E_{static} \varpropto Current_{static}·Voltage $$</p>
+</li>
 <li><p>竞相停止（race to halt， 选择性断电？)</p>
 </li>
 </ul>
@@ -227,8 +297,8 @@ E_{static} \varpropto Current_{static}·Voltage</script></li>
 </li>
 <li><p>平均无故障时间MTTF, 平均修复时间MTTR,平均故障间隔时间MRBF</p>
 </li>
-<li><script type="math/tex; mode=display">
-模块可靠性= \frac{MTTF}{(MTTF+MTTR)}</script></li>
+<li><p>$$ 模块可靠性= \frac{MTTF}{(MTTF+MTTR)} $$</p>
+</li>
 <li><p>应对故障的方法</p>
 <ul>
 <li>时间冗余(重复检查)</li>
@@ -270,13 +340,13 @@ E_{static} \varpropto Current_{static}·Voltage</script></li>
 </ul>
 </li>
 <li><p>Amdahl 定律</p>
-<script type="math/tex; mode=display">
-speedup_{total} = \frac{1}{(1-f)+\frac{f}{speedup_{f}}}</script><p>系统整体的加速比等于旧的总体时间除以未优化时间和优化部分优化后的时间，即取决于优化部分的多少和优化的加速比</p>
-<p>Amdahl定律指出仅仅优化一部分计算性能时，所获得的的整体加速比增量会越来越小，并且最终会到达一个极限。对典型情况(常见情况)进行优化会更加有意义。借用Amdahl定律可以判断某项升级对性能的提升，以及如何分配资源提高性价比。</p>
+<p> $$ speedup_{total} = \frac{1}{(1-f)+\frac{f}{speedup_{f}}} $$</p>
+<p> 系统整体的加速比等于旧的总体时间除以未优化时间和优化部分优化后的时间，即取决于优化部分的多少和优化的加速比</p>
+<p> Amdahl定律指出仅仅优化一部分计算性能时，所获得的的整体加速比增量会越来越小，并且最终会到达一个极限。对典型情况(常见情况)进行优化会更加有意义。借用Amdahl定律可以判断某项升级对性能的提升，以及如何分配资源提高性价比。</p>
 </li>
 <li><p>CPU时间</p>
-<script type="math/tex; mode=display">
-CPU\ time = \frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{time}{Cycle}</script><p>指令数(Instructions / Program)</p>
+<p> $$ CPU\ time = \frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{time}{Cycle} $$</p>
+<p>指令数(Instructions / Program)</p>
 <ul>
 <li>主要由指令集(架构)、编译器和算法决定</li>
 </ul>
