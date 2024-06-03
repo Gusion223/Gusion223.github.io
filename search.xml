@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Computer Architecture</title>
+    <url>/2023/11/20/Computer-Architecture/</url>
+    <content><![CDATA[<h1 id="计算机体系结构量化研究方法"><a href="#计算机体系结构量化研究方法" class="headerlink" title="计算机体系结构量化研究方法"></a>计算机体系结构量化研究方法</h1><h2 id="第1章-量化设计与分析基础"><a href="#第1章-量化设计与分析基础" class="headerlink" title="第1章 量化设计与分析基础"></a>第1章 量化设计与分析基础</h2><h3 id="1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势"><a href="#1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势" class="headerlink" title="1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势"></a>1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势</h3><ul>
+<li><p>单次逻辑脉冲的能耗（由晶体管频繁放电充电导致的）</p>
+</li>
+<li><p>$$ E_{dynamic} \varpropto \frac{1}{2}CU^2·f $$</p>
+</li>
+<li><p>现代未处理器减少动态功耗的方法</p>
+<ol>
+<li>不执行相关操作，如未使用核心时,禁止提供时钟</li>
+<li>动态电压-频率调整</li>
+<li>针对典型场景的设计</li>
+<li>超频(单线程时超频，关闭其他核心)</li>
+</ol>
+</li>
+</ul>
+<span id="more"></span>
+<ul>
+<li>维持状态不变的功率</li>
+<li><p>$$ E_{static} \varpropto Current_{static}·Voltage $$</p>
+</li>
+<li><p>竞相停止（race to halt， 选择性断电？)</p>
+</li>
+</ul>
+<h3 id="1-6-成本趋势"><a href="#1-6-成本趋势" class="headerlink" title="1.6 成本趋势"></a>1.6 成本趋势</h3><ul>
+<li>芯片约小成品率越高？</li>
+</ul>
+<h3 id="1-7-可信任度"><a href="#1-7-可信任度" class="headerlink" title="1.7 可信任度"></a>1.7 可信任度</h3><ul>
+<li><p>SLA/SLO</p>
+<p>两种状态</p>
+<ul>
+<li>服务实现</li>
+<li>服务中断</li>
+</ul>
+</li>
+<li><p>平均无故障时间MTTF, 平均修复时间MTTR,平均故障间隔时间MRBF</p>
+</li>
+<li><p>$$ 模块可靠性= \frac{MTTF}{(MTTF+MTTR)} $$</p>
+</li>
+<li><p>应对故障的方法</p>
+<ul>
+<li>时间冗余(重复检查)</li>
+<li>资源冗余(出错用另一个顶替运行)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-8-性能的测量、报告和汇总"><a href="#1-8-性能的测量、报告和汇总" class="headerlink" title="1.8 性能的测量、报告和汇总"></a>1.8 性能的测量、报告和汇总</h3><ul>
+<li>性能(Performance)是执行时间的倒数</li>
+<li>CPU时间，即处理器执行计算的时间。</li>
+<li>响应时间/挂钟时间/已用时间 = CPU时间 + I/O操作等等</li>
+<li>几何均值衡量多个基准测试程序<ul>
+<li>基准测试需注意的陷阱<ol>
+<li>基准测试缺乏代表性</li>
+<li>基准测试容易过时、变老。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-9-计算机设计的量化原则"><a href="#1-9-计算机设计的量化原则" class="headerlink" title="1.9 计算机设计的量化原则"></a>1.9 计算机设计的量化原则</h3><ul>
+<li><p>充分并行利用</p>
+<ul>
+<li>并行读写磁盘</li>
+<li>流水线</li>
+<li>组相联</li>
+<li>并行加法器</li>
+</ul>
+</li>
+<li><p>局部性原理</p>
+<ul>
+<li>空间局部性</li>
+<li>时间局部性</li>
+</ul>
+</li>
+<li><p>重点关注常见情况</p>
+<ul>
+<li>优化常见的情况来提升整体效率</li>
+</ul>
+</li>
+<li><p>Amdahl 定律</p>
+<p> $$ speedup_{total} = \frac{1}{(1-f)+\frac{f}{speedup_{f}}} $$</p>
+<p> 系统整体的加速比等于旧的总体时间除以未优化时间和优化部分优化后的时间，即取决于优化部分的多少和优化的加速比</p>
+<p> Amdahl定律指出仅仅优化一部分计算性能时，所获得的的整体加速比增量会越来越小，并且最终会到达一个极限。对典型情况(常见情况)进行优化会更加有意义。借用Amdahl定律可以判断某项升级对性能的提升，以及如何分配资源提高性价比。</p>
+</li>
+<li><p>CPU时间</p>
+<p> $$ CPU\ time = \frac{Instructions}{Program}\times\frac{Cycles}{Instruction}\times\frac{time}{Cycle} $$</p>
+<p>指令数(Instructions / Program)</p>
+<ul>
+<li>主要由指令集(架构)、编译器和算法决定</li>
+</ul>
+<p>CPI(Cycles/Instruction)</p>
+<ul>
+<li>主要由CPU组织和指令集(架构)决定。</li>
+</ul>
+<p>时钟周期(Time/Cycle)</p>
+<ul>
+<li>主要由(硬件)技术、组织和电路设计技术。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Computer Architecture</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kafka.md</title>
+    <url>/2023/12/12/kafka/</url>
+    <content><![CDATA[<p>目前处于新建文件夹的状态</p>
+]]></content>
+      <tags>
+        <tag>BigData</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/11/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>此贴只是用于测试mathjax渲染</title>
+    <url>/2023/11/24/test/</url>
+    <content><![CDATA[<p>$$ evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i} $$</p>
+]]></content>
+  </entry>
+</search>
