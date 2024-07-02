@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Computer Architecture</title>
+    <title>Computer Architecture(已经停更了)</title>
     <url>/2023/11/20/Computer-Architecture/</url>
     <content><![CDATA[<h1 id="计算机体系结构量化研究方法"><a href="#计算机体系结构量化研究方法" class="headerlink" title="计算机体系结构量化研究方法"></a>计算机体系结构量化研究方法</h1><h2 id="第1章-量化设计与分析基础"><a href="#第1章-量化设计与分析基础" class="headerlink" title="第1章 量化设计与分析基础"></a>第1章 量化设计与分析基础</h2><h3 id="1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势"><a href="#1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势" class="headerlink" title="1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势"></a>1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势</h3><ul>
 <li><p>单次逻辑脉冲的能耗（由晶体管频繁放电充电导致的）</p>
@@ -22,7 +22,7 @@
 <li>维持状态不变的功率</li>
 <li><p>$$ E_{static} \varpropto Current_{static}·Voltage $$</p>
 </li>
-<li><p>竞相停止（race to halt， 选择性断电？)</p>
+<li><p>竞相停止（race to halt， 选择性断电？）</p>
 </li>
 </ul>
 ]]></content>
@@ -31,7 +31,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
+    <title>Hello World(经典的新手启航)</title>
     <url>/2023/11/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
@@ -45,18 +45,25 @@
 ]]></content>
   </entry>
   <entry>
-    <title>kafka.md</title>
-    <url>/2023/12/12/kafka/</url>
-    <content><![CDATA[<p>目前处于新建文件夹的状态</p>
-]]></content>
-      <tags>
-        <tag>BigData</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>此贴只是用于测试mathjax渲染</title>
     <url>/2023/11/24/test/</url>
-    <content><![CDATA[<p>$$ evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i} $$</p>
+    <content><![CDATA[<p>在Hexo上用mathjax渲染公式还是有些麻烦的,请使用 \\\$ 替换 \$ 符号</p>
+<p>批量替换时需要好好注意</p>
+<p>$ evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i} $</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>vue3中使用ref和reative</title>
+    <url>/2024/07/02/2024/vue3-ref/</url>
+    <content><![CDATA[<p>在vue3中ref和reative(仅仅用于复杂数据类型)都会被用来包装数据类型，使之具有响应性</p>
+<p>但是两者在script中引用数值时使用时有一定的不同</p>
+<p>ref需要使用.value来访问具体数值,在赋予新数值时只需修改.value即可</p>
+<p>reative虽然可以直接访问属性,但赋值的时候需要谨慎考虑，赋值对象需要用reactive进行修饰，不然可能会失去响应性</p>
+<span id="more"></span>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="title function_">ref</span>(<span class="number">1.0</span>)</span><br><span class="line">a.<span class="property">value</span> = <span class="number">2.0</span> <span class="comment">// OK</span></span><br><span class="line">a = <span class="number">2.0</span> <span class="comment">// const 会阻止赋值</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="title function_">reactive</span>(&#123;<span class="attr">a</span>:<span class="number">10</span>&#125;) <span class="comment">// 只能是复杂对象</span></span><br><span class="line">b.<span class="property">a</span> = <span class="number">20</span> <span class="comment">// OK</span></span><br><span class="line">b = &#123;<span class="attr">a</span>:<span class="number">20</span>&#125; <span class="comment">// 失去响应性</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Vue3</tag>
+        <tag>Frontend</tag>
+      </tags>
   </entry>
 </search>
