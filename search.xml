@@ -59,11 +59,55 @@
 <p>但是两者在script中引用数值时使用时有一定的不同</p>
 <p>ref需要使用.value来访问具体数值,在赋予新数值时只需修改.value即可</p>
 <p>reative虽然可以直接访问属性,但赋值的时候需要谨慎考虑，赋值对象需要用reactive进行修饰，不然可能会失去响应性</p>
-<span id="more"></span>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="title function_">ref</span>(<span class="number">1.0</span>)</span><br><span class="line">a.<span class="property">value</span> = <span class="number">2.0</span> <span class="comment">// OK</span></span><br><span class="line">a = <span class="number">2.0</span> <span class="comment">// const 会阻止赋值</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="title function_">reactive</span>(&#123;<span class="attr">a</span>:<span class="number">10</span>&#125;) <span class="comment">// 只能是复杂对象</span></span><br><span class="line">b.<span class="property">a</span> = <span class="number">20</span> <span class="comment">// OK</span></span><br><span class="line">b = &#123;<span class="attr">a</span>:<span class="number">20</span>&#125; <span class="comment">// 失去响应性</span></span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>Vue3</tag>
         <tag>Frontend</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>否定前缀</title>
+    <url>/2024/07/16/2024/negtive-prefix/</url>
+    <content><![CDATA[<p>转载：<a href="https://www.ruanyifeng.com/blog/2006/06/un_in.html">https://www.ruanyifeng.com/blog/2006/06/un_in.html</a></p>
+<p>在英语的学习过程中我们往往会遇到很多对反义词，它们往往会以un, in等前缀开头，但是对于具体的一个词，我们应该添加一个怎样的前缀去得到它的反义词是比较令人困扰的。<br><span id="more"></span></p>
+<ul>
+<li>un<ul>
+<li>通常是用这个作为前缀，特别是对于一些简单的词来说。<ul>
+<li>比如 unfair、unclean、uneven</li>
+</ul>
+</li>
+<li>如果一个词的后缀是英语后缀，通常用un-。<ul>
+<li>比如 unceasing(-ing)、unmindful(-ful)、unwealthy(-y)、unselfish(-ish)、unwholesome(-some)。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>in/ir/im/il<ul>
+<li>如果一个词的后缀是拉丁语后缀，通常用in-。<ul>
+<li>比如，inaccurate(-ate)、incapacity(-ty)、indivisible(-ible)、insignificant(-ant)、illegal(-al)、impossible(-able)、irregular(-ar) 。</li>
+</ul>
+</li>
+<li>ir/im/il是in的变体<ul>
+<li>ir后跟r开头的单词，il后跟l开头的单词, im后跟b/m/p开头的单词</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通常来说不同的后缀会导致不同的修饰前缀<ul>
+<li>比如 unjust－injustice</li>
+</ul>
+</li>
+<li>-ed结尾的单词用un</li>
+<li>-ing结尾的单词un</li>
+<li>有些拉丁后缀的词也与 un-连用<ul>
+<li>比如unconditional、unconventional、unfortunate</li>
+</ul>
+</li>
+<li></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>English</tag>
       </tags>
   </entry>
 </search>
