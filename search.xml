@@ -238,6 +238,16 @@
 
 <h3 id="1-git-删除未跟踪的文件和文件夹"><a href="#1-git-删除未跟踪的文件和文件夹" class="headerlink" title="1. git 删除未跟踪的文件和文件夹"></a>1. git 删除未跟踪的文件和文件夹</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除未跟踪文件</span></span><br><span class="line">git clean -f</span><br><span class="line"><span class="comment"># 删除未跟踪文件和文件夹</span></span><br><span class="line">git clean -fd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="附录-推荐图形化GUI工具"><a href="#附录-推荐图形化GUI工具" class="headerlink" title="附录. 推荐图形化GUI工具"></a>附录. 推荐图形化GUI工具</h3><ul>
+<li><p>GitHub Desktop</p>
+<p>记得使用中文汉化</p>
+<p><img src="/2023/11/20/Computer-Architecture/.png" alt="GitHub Desktop图片" title="GitHub Desktop"></p>
+</li>
+<li><p>vscode(集成了版本控制的工具)</p>
+</li>
+<li><p>JetBrain全家桶(集成了版本控制的工具)</p>
+</li>
+</ul>
 ]]></content>
       <tags>
         <tag>git</tag>
