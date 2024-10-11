@@ -38,33 +38,37 @@
 <span id="more"></span>
 
 <h3 id="1-通常的项目项目结构"><a href="#1-通常的项目项目结构" class="headerlink" title="1. 通常的项目项目结构"></a>1. 通常的项目项目结构</h3><ul>
-<li>Project<ul>
+<li>Site<ul>
 <li>__pycache__</li>
 <li>__init__</li>
 <li><a href="#settings">settings.py(关于Hello项目的相关配置)</a></li>
 <li><a href="#urls">urls.py(关于Hello项目URL映射信息, 路径访问等)</a></li>
-<li><a href='views'>views.py(配置相应内容以及不同请求方式的处理)</a></li>
+<li><a href='#views'>views.py(配置相应内容以及不同请求方式的处理)</a></li>
 <li>wsgi.py</li>
 <li>asig.py</li>
 </ul>
 </li>
-<li>OtherApps<ul>
+<li>Apps<ul>
 <li>admin.py</li>
 <li>apps.py</li>
-<li><a herf='models'>models.py(DB相关)</a></li>
+<li><a herf='#models'>models.py(DB相关)</a></li>
 <li><a herf="#views">views.py(同上)</a></li>
 </ul>
 </li>
 <li>manage.py (Django 的命令行启动工具)</li>
 </ul>
 <h3 id="2-settings-py"><a href="#2-settings-py" class="headerlink" title="2. settings.py "></a><span id='settings'>2. settings.py </span></h3><ul>
-<li>DEBUG(<font color='red'>bool</font>):<br></li>
-</ul>
-<p> <font color='green'>True</font>：启动调试模式,运行时显示调试信息</p>
-<ul>
-<li><p>ALLOWED_HOST(<font color='red'>list</font>):<br><br>Debug为<font color='green'>True</font>且ALLOWED_HOST<font color='green'>[]</font>时等价于:<br><br><font color='green'>[‘.localhost’, ‘127.0.0.1’, ‘[::1]’]</font><br><br> 允许请求头host 为localhost&#x2F;127.0.0.1等访问</p>
+<li><p>DEBUG(<font color='red'>bool</font>):</p>
+<p>  <font color='green'>True</font>：启动调试模式,运行时显示调试信息</p>
 </li>
-<li><p>LANGAGE_CODE(语言,<font color='red'>str</font>):<br><br><font color='green'>‘en-us’</font>:英文<br><br><font color='green'>‘zh-Hans’</font>:中文</p>
+<li><p>ALLOWED_HOST(<font color='red'>list</font>):</p>
+<p>Debug为<font color='green'>True</font>且ALLOWED_HOST为<font color='green'>[]</font>时等价于:</p>
+<div align='center'><font color='green'>['.localhost', '127.0.0.1', '[::1]']</font></div>
+ 也就是说允许请求头中host为localhost/127.0.0.1的请求去访问
+</li>
+<li><p>LANGAGE_CODE(语言,<font color='red'>str</font>):</p>
+<p><font color='green'>‘en-us’</font>:英文</p>
+<p><font color='green'>‘zh-Hans’</font>:中文</p>
 </li>
 <li><p>TIME_ZONE(时区):</p>
 </li>
@@ -74,10 +78,24 @@
 <h3 id="3-urls-py"><a href="#3-urls-py" class="headerlink" title="3. urls.py"></a><span id='urls'>3. urls.py</span></h3><ul>
 <li>urlpatterns(路由请求,<font color='red'>list</font>):<ul>
 <li>path</li>
-<li>re_path(正则表达式匹配):^(?P&lt;name&gt;)$</li>
+<li>re_path(正则表达式匹配): 一般形式为^(?P&lt;name&gt;)$</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> Site <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(route=<span class="string">&#x27;test&#x27;</span>, view=views.test_html, name=<span class="string">&quot;test&quot;</span>),</span><br><span class="line">    path(route=<span class="string">&quot;&quot;</span>, view=views.home, name=<span class="string">&quot;home&quot;</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-views-py"><a href="#4-views-py" class="headerlink" title="4. views.py"></a><span id='views'>4. views.py</span></h3><p>使用函数定义返回数据，通常返回HttpResponse,可以自定义status_code，header等</p>
+<p>也可以使用<strong>django.shortcut.render</strong>函数对模版中的内容进行填充。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcut <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello Django!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_html</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&quot;test.html&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果考虑前后端分离的话，模版的内容粗略了解即可</p>
+<h3 id="5-models-py"><a href="#5-models-py" class="headerlink" title="5.models.py"></a><span id='models'>5.models.py</span></h3><p>主要根据数据库中的内容相关,主要封装同数据库的基本交互功能。</p>
+<p>通常使用class来声明数据库中的对象和objs</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span>(models.Model):</span><br><span class="line">    title = models.CharField(<span class="string">&quot;书名&quot;</span>, max_length=<span class="number">50</span>, default=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    price = models.DecimalField(<span class="string">&quot;定价&quot;</span>, max_digits=<span class="number">7</span>, decimal_places=<span class="number">2</span>, default=<span class="number">0.0</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        db_table = <span class="string">&#x27;books&#x27;</span></span><br><span class="line"><span class="comment"># 写业务逻辑时调用 Book.objects 中的方法,类似与Mybatis的封装</span></span><br></pre></td></tr></table></figure>
+
+<p>models.py中的内容更新后，需要在终端输入如下指令来同步:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">python3 manage.py makemigrations</span><br><span class="line">python3 manage.py migrate</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>Backend</tag>
@@ -109,6 +127,7 @@
 
 <p>将其中的number:true修改为false即可</p>
 <h3 id="2-关于鼠标拖尾和点击特效"><a href="#2-关于鼠标拖尾和点击特效" class="headerlink" title="2.关于鼠标拖尾和点击特效"></a>2.关于鼠标拖尾和点击特效</h3><p>参考链接:<a href="https://github.com/sumumm/hexo-next-mouse-effect">自用NexT主题鼠标效果插件</a></p>
+<p>或者英语好点可以看这个:<a href="https://github.com/tholman/cursor-effects">Old-school cursor effects for your browser built with modern JavaScript</a></p>
 <p>效果图如下:<br><img src="/2024/10/01/NexT-config/cursor_effect.gif" alt="鼠标效果图" title="鼠标拖尾点击效果"></p>
 <h3 id="3-图片点击放大"><a href="#3-图片点击放大" class="headerlink" title="3.图片点击放大"></a>3.图片点击放大</h3><p>可以在在 themes\next\_config.yml中找到如下片段</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
@@ -209,6 +228,19 @@
       <tags>
         <tag>Frontend</tag>
         <tag>Vue3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git常用命令</title>
+    <url>/2024/10/11/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>此处简单介绍一些可能比较常用的git指令，当然在 command 或者 bash 上敲代码是相当令人不爽的，本文后续应该会推荐一些好用的GUI工具帮助分析(有待填坑)。</p>
+<span id="more"></span>
+
+<h3 id="1-git-删除未跟踪的文件和文件夹"><a href="#1-git-删除未跟踪的文件和文件夹" class="headerlink" title="1. git 删除未跟踪的文件和文件夹"></a>1. git 删除未跟踪的文件和文件夹</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除未跟踪文件</span></span><br><span class="line">git clean -f</span><br><span class="line"><span class="comment"># 删除未跟踪文件和文件夹</span></span><br><span class="line">git clean -fd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
 </search>

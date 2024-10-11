@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文简要介绍一些关于关于Django的项目部署的相关内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-08T10:08:49.000Z">
-<meta property="article:modified_time" content="2024-10-08T11:58:38.785Z">
+<meta property="article:modified_time" content="2024-10-08T14:23:50.843Z">
 <meta property="article:author" content="Kata Gusion">
 <meta property="article:tag" content="Backend">
 <meta property="article:tag" content="Python">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%9A%E5%B8%B8%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-text">1. 通常的项目项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-settings-py"><span class="nav-text">2. settings.py </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-urls-py"><span class="nav-text">3. urls.py</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%9A%E5%B8%B8%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-text">1. 通常的项目项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-settings-py"><span class="nav-text">2. settings.py </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-urls-py"><span class="nav-text">3. urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-views-py"><span class="nav-text">4. views.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-models-py"><span class="nav-text">5.models.py</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,13 +161,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -224,7 +224,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-10-08 18:08:49 / 修改时间：19:58:38" itemprop="dateCreated datePublished" datetime="2024-10-08T18:08:49+08:00">2024-10-08</time>
+      <time title="创建时间：2024-10-08 18:08:49 / 修改时间：22:23:50" itemprop="dateCreated datePublished" datetime="2024-10-08T18:08:49+08:00">2024-10-08</time>
     </span>
 
   
@@ -234,7 +234,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>552</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -255,33 +255,37 @@
 <span id="more"></span>
 
 <h3 id="1-通常的项目项目结构"><a href="#1-通常的项目项目结构" class="headerlink" title="1. 通常的项目项目结构"></a>1. 通常的项目项目结构</h3><ul>
-<li>Project<ul>
+<li>Site<ul>
 <li>__pycache__</li>
 <li>__init__</li>
 <li><a href="#settings">settings.py(关于Hello项目的相关配置)</a></li>
 <li><a href="#urls">urls.py(关于Hello项目URL映射信息, 路径访问等)</a></li>
-<li><a href='views'>views.py(配置相应内容以及不同请求方式的处理)</a></li>
+<li><a href='#views'>views.py(配置相应内容以及不同请求方式的处理)</a></li>
 <li>wsgi.py</li>
 <li>asig.py</li>
 </ul>
 </li>
-<li>OtherApps<ul>
+<li>Apps<ul>
 <li>admin.py</li>
 <li>apps.py</li>
-<li><a herf='models'>models.py(DB相关)</a></li>
+<li><a herf='#models'>models.py(DB相关)</a></li>
 <li><a herf="#views">views.py(同上)</a></li>
 </ul>
 </li>
 <li>manage.py (Django 的命令行启动工具)</li>
 </ul>
 <h3 id="2-settings-py"><a href="#2-settings-py" class="headerlink" title="2. settings.py "></a><span id='settings'>2. settings.py </span></h3><ul>
-<li>DEBUG(<font color='red'>bool</font>):<br></li>
-</ul>
-<p> <font color='green'>True</font>：启动调试模式,运行时显示调试信息</p>
-<ul>
-<li><p>ALLOWED_HOST(<font color='red'>list</font>):<br><br>Debug为<font color='green'>True</font>且ALLOWED_HOST<font color='green'>[]</font>时等价于:<br><br><font color='green'>[‘.localhost’, ‘127.0.0.1’, ‘[::1]’]</font><br><br> 允许请求头host 为localhost&#x2F;127.0.0.1等访问</p>
+<li><p>DEBUG(<font color='red'>bool</font>):</p>
+<p>  <font color='green'>True</font>：启动调试模式,运行时显示调试信息</p>
 </li>
-<li><p>LANGAGE_CODE(语言,<font color='red'>str</font>):<br><br><font color='green'>‘en-us’</font>:英文<br><br><font color='green'>‘zh-Hans’</font>:中文</p>
+<li><p>ALLOWED_HOST(<font color='red'>list</font>):</p>
+<p>Debug为<font color='green'>True</font>且ALLOWED_HOST为<font color='green'>[]</font>时等价于:</p>
+<div align='center'><font color='green'>['.localhost', '127.0.0.1', '[::1]']</font></div>
+ 也就是说允许请求头中host为localhost/127.0.0.1的请求去访问
+</li>
+<li><p>LANGAGE_CODE(语言,<font color='red'>str</font>):</p>
+<p><font color='green'>‘en-us’</font>:英文</p>
+<p><font color='green'>‘zh-Hans’</font>:中文</p>
 </li>
 <li><p>TIME_ZONE(时区):</p>
 </li>
@@ -291,10 +295,24 @@
 <h3 id="3-urls-py"><a href="#3-urls-py" class="headerlink" title="3. urls.py"></a><span id='urls'>3. urls.py</span></h3><ul>
 <li>urlpatterns(路由请求,<font color='red'>list</font>):<ul>
 <li>path</li>
-<li>re_path(正则表达式匹配):^(?P&lt;name&gt;)$</li>
+<li>re_path(正则表达式匹配): 一般形式为^(?P&lt;name&gt;)$</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> Site <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(route=<span class="string">&#x27;test&#x27;</span>, view=views.test_html, name=<span class="string">&quot;test&quot;</span>),</span><br><span class="line">    path(route=<span class="string">&quot;&quot;</span>, view=views.home, name=<span class="string">&quot;home&quot;</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-views-py"><a href="#4-views-py" class="headerlink" title="4. views.py"></a><span id='views'>4. views.py</span></h3><p>使用函数定义返回数据，通常返回HttpResponse,可以自定义status_code，header等</p>
+<p>也可以使用<strong>django.shortcut.render</strong>函数对模版中的内容进行填充。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcut <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello Django!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_html</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&quot;test.html&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果考虑前后端分离的话，模版的内容粗略了解即可</p>
+<h3 id="5-models-py"><a href="#5-models-py" class="headerlink" title="5.models.py"></a><span id='models'>5.models.py</span></h3><p>主要根据数据库中的内容相关,主要封装同数据库的基本交互功能。</p>
+<p>通常使用class来声明数据库中的对象和objs</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span>(models.Model):</span><br><span class="line">    title = models.CharField(<span class="string">&quot;书名&quot;</span>, max_length=<span class="number">50</span>, default=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    price = models.DecimalField(<span class="string">&quot;定价&quot;</span>, max_digits=<span class="number">7</span>, decimal_places=<span class="number">2</span>, default=<span class="number">0.0</span>)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        db_table = <span class="string">&#x27;books&#x27;</span></span><br><span class="line"><span class="comment"># 写业务逻辑时调用 Book.objects 中的方法,类似与Mybatis的封装</span></span><br></pre></td></tr></table></figure>
+
+<p>models.py中的内容更新后，需要在终端输入如下指令来同步:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations</span><br><span class="line">python3 manage.py migrate</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -317,6 +335,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/10/11/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="Git常用命令">
+                  Git常用命令 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -348,14 +369,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">3k</span>
+    <span title="站点总字数">5k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3 分钟</span>
+    <span title="站点阅读时长">4 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
