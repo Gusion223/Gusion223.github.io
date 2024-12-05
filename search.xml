@@ -1,34 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>计算机体系结构(已经停更了)</title>
-    <url>/2023/11/20/Computer-Architecture/</url>
-    <content><![CDATA[<h1 id="计算机体系结构量化研究方法"><a href="#计算机体系结构量化研究方法" class="headerlink" title="计算机体系结构量化研究方法"></a>计算机体系结构量化研究方法</h1><h2 id="第1章-量化设计与分析基础"><a href="#第1章-量化设计与分析基础" class="headerlink" title="第1章 量化设计与分析基础"></a>第1章 量化设计与分析基础</h2><h3 id="1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势"><a href="#1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势" class="headerlink" title="1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势"></a>1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势</h3><ul>
-<li><p>单次逻辑脉冲的能耗（由晶体管频繁放电充电导致的）</p>
-<p>$$ E_{dynamic} \varpropto \frac{1}{2}CU^2·f $$</p>
-</li>
-<li><p>现代微处理器减少动态功耗的方法</p>
-<ol>
-<li>不执行相关操作，如未使用核心时,禁止提供时钟</li>
-<li>动态电压-频率调整</li>
-<li>针对典型场景的设计</li>
-<li>超频(单线程时超频，关闭其他核心)</li>
-</ol>
-</li>
+    <title>【论文笔记】Generative Omnimatte:Learning to Decompose Video into Layers</title>
+    <url>/2024/12/06/Generative%20Omnimatte/</url>
+    <content><![CDATA[<p>Authors：<a href="https://arxiv.org/search/cs?searchtype=author&query=Lee,+Y">Yao-Chih Lee</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Lu,+E">Erika Lu</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Rumbley,+S">Sarah Rumbley</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Geyer,+M">Michal Geyer</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Huang,+J">Jia-Bin Huang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Dekel,+T">Tali Dekel</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Cole,+F">Forrester Cole</a></p>
+<p>Source: <a href="https://arxiv.org/abs/2411.16683">arxiv</a></p>
+<p>相关术语:</p>
+<ul>
+<li>omnimatte: 个人感觉是指在视频层面分层(算出alpha通道，也就是透明度)+抠图(算出前景图), Video Matting with Associated Effects, omnimatte 也对应了一个类似的模型。</li>
+<li>effect:物体在环境中产生的相关效应或事物(比如阴影,水花，尾迹等等)</li>
+<li>w&#x2F;o: without的缩写</li>
 </ul>
 <span id="more"></span>
 
+<h3 id="1-Introduction-讲一下要进行的任务"><a href="#1-Introduction-讲一下要进行的任务" class="headerlink" title="1.Introduction(讲一下要进行的任务)"></a>1.Introduction(讲一下要进行的任务)</h3><p>在动态变化的背景中, 对视频中的对象(包括猜出在产生的效应effect)分层,并且要猜出被遮挡。</p>
+<h3 id="2-Related-Work-背景介绍以及阐述创新性"><a href="#2-Related-Work-背景介绍以及阐述创新性" class="headerlink" title="2. Related Work(背景介绍以及阐述创新性)"></a>2. Related Work(背景介绍以及阐述创新性)</h3><ul>
+<li>介绍了图像的matting task, 以及对应的 effect removal.</li>
+<li>以往物体移除模型前提: 静止的背景、准确的姿态评估(accurate camera and depth estimation?)</li>
+<li>扩散模型在文生成视频和视频修复的进步,但无法很好解决effect的问题。</li>
+<li>Vedio Shadow Removal的工作不关注 Object Removal, Object-Shadow Association 和 Background Completion(背景补齐)。</li>
+<li>图像的 Object and Effect Removal 模型因为缺少时间一致性, 无法很好地运用于视频。</li>
+</ul>
+<h3 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h3><p><img src="/2024/12/06/Generative%20Omnimatte/2StepMethod.png" alt="2 Step Method" title="两步方法"></p>
+<p>总体分两步走:</p>
+<ol>
+<li>使用trimask和微调Vedio Inpainting Model(DM)获得单个物体的视频<ul>
+<li>输入:一个视频, 和一组物体掩码</li>
+<li>使用 Trimask微调Vedio Inpainting Model(DM), Trimask只保留一个物体,背景的则不保留任何物体。</li>
+</ul>
+</li>
+<li>使用Unet生成对应Omnimatte<ul>
+<li>输入:Solo Video 以及差别视频 Error &#x3D; $ |I_i-I_{bg}| $</li>
+</ul>
+</li>
+</ol>
 <ul>
-<li><p>维持状态不变的功率</p>
+<li><p>数据集的构建</p>
+<ol>
+<li>Omnimatte:现有相关模型的成功案例</li>
+<li>Tripod: 室外背景, 环境移动, 更多的effect,  Ken Burns  Effect(镜头移动)加入</li>
+<li>Kubric: 使用Kubric合成数据集, 多物件、</li>
+<li>Object-Paste:拼接合成, 背景视频+随机Obj</li>
+</ol>
 </li>
-<li><p>$$ E_{static} \varpropto Current_{static}·Voltage $$</p>
+<li><p>损失函数(第二步)</p>
+<p>$L_{recon}$: Solo Vedio 与 前景背景混合结果的像素平方差和</p>
+<p>$L_{Sparsity}$：alpha通道的L0、L1正则项的和</p>
+<p>$L_{mask}$：alpha通道和mask的像素平方差和(训练一开始使用,后面不用)</p>
 </li>
-<li><p>竞相停止（race to halt， 选择性断电？）</p>
+<li><p>一些细节:</p>
+<p>文末有supplement material, 有具体细节, Omnimatte处理有两个版本, 损失略微不同。</p>
 </li>
 </ul>
+<h3 id="4-Results-定性、定量比较以及消融实验，略"><a href="#4-Results-定性、定量比较以及消融实验，略" class="headerlink" title="4. Results(定性、定量比较以及消融实验，略)"></a>4. Results(定性、定量比较以及消融实验，略)</h3><h3 id="5-Discussion-and-Limitations"><a href="#5-Discussion-and-Limitations" class="headerlink" title="5. Discussion and Limitations"></a>5. Discussion and Limitations</h3><p>局限性:</p>
+<ol>
+<li>作为数据驱动的模型,缺乏对应的effect的数据集, 能脑补消除的effect有限(文章中提到的是物体变形, 就是physical deformations)</li>
+<li>需要额外的知识(比如实例分割), 众多相似对象的时候表现不佳。</li>
+<li>Object 关联的无关的 Effect, 可能会修改无关的背景信息</li>
+</ol>
+<p>讨论:</p>
+<ol>
+<li>用户输入的必要性(强制某区域信息不变)</li>
+</ol>
 ]]></content>
       <tags>
-        <tag>Computer Architecture</tag>
+        <tag>Vedio Process</tag>
+        <tag>Computer Vision</tag>
       </tags>
   </entry>
   <entry>
@@ -100,6 +137,60 @@
       <tags>
         <tag>Backend</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git常用命令</title>
+    <url>/2024/10/11/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>此处简单介绍一些可能比较常用的git指令，当然在 command 或者 bash 上敲代码是相当令人不爽的，本文后续应该会推荐一些好用的GUI工具帮助分析(有待填坑)。</p>
+<span id="more"></span>
+
+<h3 id="1-git-删除未跟踪的文件和文件夹"><a href="#1-git-删除未跟踪的文件和文件夹" class="headerlink" title="1. git 删除未跟踪的文件和文件夹"></a>1. git 删除未跟踪的文件和文件夹</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除未跟踪文件</span></span><br><span class="line">git clean -f</span><br><span class="line"><span class="comment"># 删除未跟踪文件和文件夹</span></span><br><span class="line">git clean -fd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="附录-推荐图形化GUI工具"><a href="#附录-推荐图形化GUI工具" class="headerlink" title="附录. 推荐图形化GUI工具"></a>附录. 推荐图形化GUI工具</h3><ul>
+<li><p>GitHub Desktop</p>
+<p>记得使用中文汉化</p>
+<p><img src="/2024/10/11/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/GitHub_Desktop.png" alt="GitHub Desktop图片" title="GitHub Desktop"></p>
+</li>
+<li><p>vscode(集成了版本控制的工具)</p>
+</li>
+<li><p>JetBrain全家桶(集成了版本控制的工具)</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机体系结构(已经停更了)</title>
+    <url>/2023/11/20/Computer-Architecture/</url>
+    <content><![CDATA[<h1 id="计算机体系结构量化研究方法"><a href="#计算机体系结构量化研究方法" class="headerlink" title="计算机体系结构量化研究方法"></a>计算机体系结构量化研究方法</h1><h2 id="第1章-量化设计与分析基础"><a href="#第1章-量化设计与分析基础" class="headerlink" title="第1章 量化设计与分析基础"></a>第1章 量化设计与分析基础</h2><h3 id="1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势"><a href="#1-5-功耗和能耗（Power-and-Energy-在集成电路方面的趋势" class="headerlink" title="1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势"></a>1.5 功耗和能耗（Power and Energy)在集成电路方面的趋势</h3><ul>
+<li><p>单次逻辑脉冲的能耗（由晶体管频繁放电充电导致的）</p>
+<p>$$ E_{dynamic} \varpropto \frac{1}{2}CU^2·f $$</p>
+</li>
+<li><p>现代微处理器减少动态功耗的方法</p>
+<ol>
+<li>不执行相关操作，如未使用核心时,禁止提供时钟</li>
+<li>动态电压-频率调整</li>
+<li>针对典型场景的设计</li>
+<li>超频(单线程时超频，关闭其他核心)</li>
+</ol>
+</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><p>维持状态不变的功率</p>
+</li>
+<li><p>$$ E_{static} \varpropto Current_{static}·Voltage $$</p>
+</li>
+<li><p>竞相停止（race to halt， 选择性断电？）</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Computer Architecture</tag>
       </tags>
   </entry>
   <entry>
@@ -228,29 +319,6 @@
       <tags>
         <tag>Frontend</tag>
         <tag>Vue3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git常用命令</title>
-    <url>/2024/10/11/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>此处简单介绍一些可能比较常用的git指令，当然在 command 或者 bash 上敲代码是相当令人不爽的，本文后续应该会推荐一些好用的GUI工具帮助分析(有待填坑)。</p>
-<span id="more"></span>
-
-<h3 id="1-git-删除未跟踪的文件和文件夹"><a href="#1-git-删除未跟踪的文件和文件夹" class="headerlink" title="1. git 删除未跟踪的文件和文件夹"></a>1. git 删除未跟踪的文件和文件夹</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除未跟踪文件</span></span><br><span class="line">git clean -f</span><br><span class="line"><span class="comment"># 删除未跟踪文件和文件夹</span></span><br><span class="line">git clean -fd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="附录-推荐图形化GUI工具"><a href="#附录-推荐图形化GUI工具" class="headerlink" title="附录. 推荐图形化GUI工具"></a>附录. 推荐图形化GUI工具</h3><ul>
-<li><p>GitHub Desktop</p>
-<p>记得使用中文汉化</p>
-<p><img src="/2023/11/20/Computer-Architecture/.png" alt="GitHub Desktop图片" title="GitHub Desktop"></p>
-</li>
-<li><p>vscode(集成了版本控制的工具)</p>
-</li>
-<li><p>JetBrain全家桶(集成了版本控制的工具)</p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
 </search>
