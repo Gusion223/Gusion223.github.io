@@ -157,13 +157,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -189,7 +189,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/06/Generative%20Omnimatte/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/07/Paper/PSTNet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/06/Generative%20Omnimatte/" class="post-title-link" itemprop="url">【论文笔记】Generative Omnimatte:Learning to Decompose Video into Layers</a>
+          <a href="/2024/12/07/Paper/PSTNet/" class="post-title-link" itemprop="url">【论文笔记】Learning Physical-Spatio-Temporal Features for Video Shadow Removal</a>
         </h2>
 
         <div class="post-meta-container">
@@ -219,7 +219,131 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-12-06 04:10:51 / 修改时间：04:21:50" itemprop="dateCreated datePublished" datetime="2024-12-06T04:10:51+08:00">2024-12-06</time>
+      <time title="创建时间：2024-12-07 01:44:05 / 修改时间：01:52:35" itemprop="dateCreated datePublished" datetime="2024-12-07T01:44:05+08:00">2024-12-07</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>429</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><ul>
+<li><p>图像领域的阴影去除发展, 视频修复领域的应用发展。</p>
+</li>
+<li><p>阴影的三种特征:物理属性、空间关系、时间一致性。</p>
+<ul>
+<li>物理方法: 将原先的图片过曝, 在和原图片进行混合</li>
+</ul>
+</li>
+<li><p>GTA5 合成的数据集</p>
+</li>
+<li><p>新的策略: 跨域(FDA)</p>
+</li>
+</ul>
+<h3 id="4-Proposed-Method"><a href="#4-Proposed-Method" class="headerlink" title="4. Proposed Method"></a>4. Proposed Method</h3><ul>
+<li><p>使用过曝、原图像空间信息以及光流图进行建模。</p>
+</li>
+<li><p>网络结构:</p>
+<p><img src="/2024/12/07/Paper/PSTNet/image-20241207005732546.png" alt="image-20241207005732546" title="网络结构"></p>
+</li>
+<li><p>MSAM:</p>
+<p><img src="/2024/12/07/Paper/PSTNet/image-20241207010151324.png" alt="image-20241207010151324" title="MASM模块"></p>
+</li>
+<li><p>TAB:</p>
+</li>
+<li><p><img src="/2024/12/07/Paper/PSTNet/image-20241207011252657.png" alt="image-20241207011252657" title="TAB模块"></p>
+</li>
+<li><p>Model adaptation in real world scenes(S2R)</p>
+<ul>
+<li><p>Fourier Domain Adaptation(FDA)</p>
+<p>一种简单的无监督域适应方法，通过交换源域和目标域的低频频谱来减少二者分布之间的差异。主要是通过FFT将图像中的相位和振幅分离,用目标域的低频振幅替换源域做训练来近似域对齐。主要通过FDA,将目标域转化到训练图片的域上进行处理，然后还原到目标域,文章中是采用色彩直方图最接近的图片作为变化的参考,效果和方法如下:</p>
+<p><img src="/2024/12/07/Paper/PSTNet/image-20241207012735609.png" alt="image-20241207012735609" title="S2R"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Limitation"><a href="#6-Limitation" class="headerlink" title="6. Limitation"></a>6. Limitation</h3><ul>
+<li>传统方法在人影移除上更好</li>
+<li>在低光照对比度的场景会失效</li>
+<li>域适应后仍然存在较大偏差。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/06/Paper/Generative%20Omnimatte/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kata Gusion">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kata Gusion's Blog">
+      <meta itemprop="description" content="The Road Not Taken">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kata Gusion's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/06/Paper/Generative%20Omnimatte/" class="post-title-link" itemprop="url">【论文笔记】Generative Omnimatte:Learning to Decompose Video into Layers</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-06 04:10:51 / 修改时间：04:25:57" itemprop="dateCreated datePublished" datetime="2024-12-06T04:10:51+08:00">2024-12-06</time>
     </span>
 
   
@@ -257,7 +381,7 @@
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/06/Generative%20Omnimatte/#more" rel="contents">
+              <a class="btn" href="/2024/12/06/Paper/Generative%20Omnimatte/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -316,9 +440,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-10-11 12:18:12 / 修改时间：17:42:49" itemprop="dateCreated datePublished" datetime="2024-10-11T12:18:12+08:00">2024-10-11</time>
+      <time title="创建时间：2024-10-11 12:18:12" itemprop="dateCreated datePublished" datetime="2024-10-11T12:18:12+08:00">2024-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-06 04:28:29" itemprop="dateModified" datetime="2024-12-06T04:28:29+08:00">2024-12-06</time>
     </span>
 
   
@@ -1038,109 +1168,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/20/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kata Gusion">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kata Gusion's Blog">
-      <meta itemprop="description" content="The Road Not Taken">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kata Gusion's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/20/hello-world/" class="post-title-link" itemprop="url">编程第一步，你好世界</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-20 18:51:38" itemprop="dateCreated datePublished" datetime="2023-11-20T18:51:38+08:00">2023-11-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-01 11:50:25" itemprop="dateModified" datetime="2024-10-01T11:50:25+08:00">2024-10-01</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>367</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
@@ -1169,7 +1199,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5 分钟</span>
+    <span title="站点阅读时长">6 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
